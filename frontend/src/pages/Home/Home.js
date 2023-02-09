@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import Hero from "../../Components/Sections/Hero.js"
 
 const Home = () => {
 
@@ -11,6 +12,7 @@ const Home = () => {
           content=""
         />
       </Helmet>
+      <Hero />
     </>
   );
 };
