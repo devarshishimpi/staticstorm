@@ -4,6 +4,7 @@ import NavBar from "./Components/NavBar/Navbar";
 import NewProject from "./pages/NewProject/NewProject";
 import Deploying from "./pages/Deploying/Deploying";
 import { useEffect } from "react";
+import SelectConfig from "./pages/SelectConfig/SelectConfig";
 
 function App() {
   useEffect(() => {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/newproject" element={<NewProject />} />
         <Route path="/deploying" element={<Deploying />} />
+        <Route path="/selectconfig" element={<SelectConfig />} />
       </Routes>
     </Router>
   );
