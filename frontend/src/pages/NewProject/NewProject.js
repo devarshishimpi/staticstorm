@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import NewDeploy from "../../Components/NewDeploy/NewDeploy";
 
 const NewProject = () => {
 
@@ -11,7 +12,7 @@ const NewProject = () => {
           content=""
         />
       </Helmet>
-
+      <NewDeploy />
     </>
   );
 };
