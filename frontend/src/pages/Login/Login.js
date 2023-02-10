@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <>
       <Helmet>
-        <title>StaticStorm | Home</title>
+        <title>StaticStorm | Login</title>
         <meta
           name="description"
           content=""

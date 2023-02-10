@@ -1,19 +1,19 @@
 import { Helmet } from "react-helmet";
-import DeploySettings from "../../Components/DeploySettings/DeploySettings"
+import Projects from "../../Components/Projects/Projects"
 
 const Dashboard = () => {
 
   return (
     <div class="flex items-center justify-center">
       <Helmet>
-        <title>StaticStorm | Home</title>
+        <title>StaticStorm | Dashboard</title>
         <meta
           name="description"
           content=""
         />
       </Helmet>
 
-      <DeploySettings/>
+      <Projects/>
 
     </div>
   );

@@ -6,7 +6,7 @@ const NewProject = () => {
   return (
     <>
       <Helmet>
-        <title>StaticStorm | Home</title>
+        <title>StaticStorm | New Project</title>
         <meta
           name="description"
           content=""

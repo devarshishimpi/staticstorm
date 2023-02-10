@@ -6,7 +6,7 @@ const NewProject = () => {
   return (
     <div class="flex items-center justify-center">
       <Helmet>
-        <title>StaticStorm | Home</title>
+        <title>StaticStorm | Deploying</title>
         <meta
           name="description"
           content=""

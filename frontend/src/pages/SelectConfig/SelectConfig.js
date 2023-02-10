@@ -6,7 +6,7 @@ const SelectConfig = () => {
   return (
     <div class="flex items-center justify-center">
       <Helmet>
-        <title>StaticStorm | Home</title>
+        <title>StaticStorm | New Project</title>
         <meta
           name="description"
           content=""
