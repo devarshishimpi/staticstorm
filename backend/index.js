@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 // Available Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/deploy', require('./routes/deploy'));
+app.use('/api/projects', require('./routes/projects'));
 
 app.listen(PORT, () => {
   console.log(`Server started at http://localhost:${PORT}`);
