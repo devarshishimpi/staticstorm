@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
     const navigation = [
@@ -13,6 +14,7 @@ const NavBar = () => {
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
+      const navigate = useNavigate();
   return (
     <>
         <Disclosure as="nav" className="bg-gray-800">
@@ -115,12 +117,15 @@ const NavBar = () => {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="/"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          <button
+                            onClick={() => {
+                              localStorage.removeItem('access-token');
+                              navigate('/login');
+                            }}
+                            className={classNames(active ? 'bg-gray-100' : '', 'px-4 py-2 text-sm text-gray-700 w-full flex justify-start')}
                           >
-                            Sign out
-                          </a>
+                            Logout
+                          </button>
                         )}
                       </Menu.Item>
                     </Menu.Items>

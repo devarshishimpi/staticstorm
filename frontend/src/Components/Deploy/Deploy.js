@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const content = `Running build in Cleveland, USA (East) – cle1
 Cloning github.com/devarshishimpi/staticstormhackathon (Branch: main, Commit: 80f21eb)
@@ -10,7 +10,74 @@ const domains = `staticstormhackathon-devarshishimpi.vercel.app - Done
 staticstormhackathon-git-main-devarshishimpi.vercel.app - Done
 staticstormhackathon.vercel.app - Done`;
 
-const Deploy = () => {
+const Deploy = ({ id }) => {
+  const [cloningLogs, setCloningLogs] = useState(null);
+  const [installLogs, setInstallLogs] = useState(null);
+  const [buildLogs, setBuildLogs] = useState(null);
+  console.log(id);
+
+  const clone = async () => {
+    const accessToken = localStorage.getItem('access-token');
+    const response = await fetch('http://localhost:8181/api/deploy/clone', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ accessToken , projectId: id })
+    });
+    const json = await response.json();
+    setCloningLogs(json.message);
+  }
+
+  const install = async () => {
+    const accessToken = localStorage.getItem('access-token');
+    const response = await fetch('http://localhost:8181/api/deploy/install', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ accessToken , projectId: id })
+    });
+    const json = await response.json();
+    setInstallLogs(json);
+  }
+
+  const build = async () => {
+    const accessToken = localStorage.getItem('access-token');
+    const response = await fetch('http://localhost:8181/api/deploy/build', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ accessToken , projectId: id })
+    });
+    const json = await response.json();
+    setBuildLogs(json);
+  }
+
+  const copyBuild = async () => {
+    const accessToken = localStorage.getItem('access-token');
+    const response = await fetch('http://localhost:8181/api/deploy/copybuild', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ accessToken , projectId: id })
+    });
+    const json = await response.json();
+    console.log(json);
+  }
+
+  useEffect(() => {
+    const allThings = async () => {
+      await clone();
+      await install();
+      await build();
+      await copyBuild();
+    }
+    allThings();
+  }, []);
+  
 
   return (
     <div className="w-[90%]">
@@ -19,7 +86,7 @@ const Deploy = () => {
         <div className="mx-auto p-4 bg-gray-900 border border-gray-900 rounded-lg shadow">
         <div className="block p-3 border rounded-lg shadow  bg-gray-800 border-gray-800">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">Status</h5>
-            <p className="font-normal text-gray-400">🟢Deploying</p>      
+            <p className="font-normal text-gray-400">🟢 Deploying</p>      
         </div>
         <div className="mt-3 block p-3 border rounded-lg shadow  bg-gray-800 border-gray-800">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">Environment</h5>
@@ -40,16 +107,38 @@ const Deploy = () => {
     </div>
       <div className="mt-5 max-w-screen-xl mx-auto p-4 bg-gray-900 border border-gray-800 rounded-lg shadow">
       <div className=" max-w-screen-xl mx-auto p-6 bg-gray-800 border border-gray-800 rounded-lg shadow">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">Deploying</h5>
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">Cloning <small>{!cloningLogs && "(Processing...)"}</small></h5>
           <p className="font-mono text-gray-300">
-            {content.split("\n").map((line, index) => (
+            {cloningLogs && cloningLogs.split("\n").map((line, index) => (
               <React.Fragment key={index}>
-                {line}
+                {cloningLogs === "Repository cloned successfully" ? `🟢 ${line}` : `🔴 Failed to clone repository`}
                 <br />
               </React.Fragment>
             ))}
           </p>
         </div>
+        <div className="mt-5 max-w-screen-xl mx-auto p-6 bg-gray-800 border border-gray-800 rounded-lg shadow">
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">Installing Dependencies <small>{!installLogs && "(Processing...)"}</small></h5>
+          <p className="font-mono text-gray-300">
+              {installLogs && <React.Fragment>
+                {installLogs.logs}
+                <br /> <br />
+                {installLogs.message === "Dependencies installed successfully" ? `🟢 ${installLogs.message}` : `🔴 Failed to install dependencies`}
+                <br />
+              </React.Fragment>}
+          </p>
+          </div>
+        <div className="mt-5 max-w-screen-xl mx-auto p-6 bg-gray-800 border border-gray-800 rounded-lg shadow">
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">Building <small>{!buildLogs && "(Processing...)"}</small></h5>
+          <p className="font-mono text-gray-300">
+            {buildLogs && <React.Fragment>
+                {buildLogs.logs}
+                <br /> <br />
+                {buildLogs.message === "Build successful" ? `🟢 ${buildLogs.message}` : `🔴 Failed to build`}
+                <br />
+              </React.Fragment>}
+          </p>
+          </div>
         <div className="mt-5 max-w-screen-xl mx-auto p-6 bg-gray-800 border border-gray-800 rounded-lg shadow">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">Assigning Domains</h5>
           <p className="font-mono text-gray-300">

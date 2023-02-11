@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import SelectConfig from "./pages/SelectConfig/SelectConfig";
 import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import VerifyLogin from "./utils/VerifyLogin";
 
 function App() {
   useEffect(() => {
@@ -19,10 +20,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/newproject" element={<NewProject />} />
-        <Route path="/deploying" element={<Deploying />} />
-        <Route path="/selectconfig" element={<SelectConfig />} />
+        <Route path="/deploying/:id" element={<Deploying />} />
+        <Route path="/selectconfig/:id" element={<SelectConfig />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/verifyLogin" element={<VerifyLogin />} />
       </Routes>
     </Router>
   );

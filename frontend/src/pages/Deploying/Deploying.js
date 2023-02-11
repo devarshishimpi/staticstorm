@@ -1,10 +1,12 @@
 import { Helmet } from "react-helmet";
+import { useParams } from "react-router-dom";
 import Deploy from "../../Components/Deploy/Deploy"
 
 const NewProject = () => {
+  const { id } = useParams();
 
   return (
-    <div class="flex items-center justify-center">
+    <div className="flex items-center justify-center">
       <Helmet>
         <title>StaticStorm | Deploying</title>
         <meta
@@ -13,7 +15,7 @@ const NewProject = () => {
         />
       </Helmet>
 
-      <Deploy/>
+      <Deploy id={id} />
 
     </div>
   );
