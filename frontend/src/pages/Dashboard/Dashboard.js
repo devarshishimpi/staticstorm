@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import Projects from "../../Components/Projects/Projects"
 
 const Dashboard = () => {
+  const [user, setUser] = useState(null);
+
   const navigate = useNavigate();
 
   const validateAccessToken = async () => {
@@ -17,6 +19,9 @@ const Dashboard = () => {
     if (!json.id) {
       localStorage.removeItem('access-token');
       navigate('/login');
+    }
+    else {
+      setUser(json);
     }
   }
 
@@ -39,7 +44,7 @@ const Dashboard = () => {
         />
       </Helmet>
 
-      <Projects/>
+      <Projects user={user} />
 
     </div>
   );

@@ -1,15 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-const content = `Running build in Cleveland, USA (East) – cle1
-Cloning github.com/devarshishimpi/staticstormhackathon (Branch: main, Commit: 80f21eb)
-Previous build cache not available
-Cloning completed: 375.626ms
-Running "vercel build"
-Done in 1.00s`;
-const domains = `staticstormhackathon-devarshishimpi.vercel.app - Done
-staticstormhackathon-git-main-devarshishimpi.vercel.app - Done
-staticstormhackathon.vercel.app - Done`;
-
 const Deploy = ({ id }) => {
   const [cloningLogs, setCloningLogs] = useState(null);
   const [installLogs, setInstallLogs] = useState(null);
@@ -18,7 +8,7 @@ const Deploy = ({ id }) => {
 
   const clone = async () => {
     const accessToken = localStorage.getItem('access-token');
-    const response = await fetch('http://localhost:8181/api/deploy/clone', {
+    const response = await fetch('http://abcd.staticstorm.coderush.tech/api/deploy/clone', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -31,7 +21,7 @@ const Deploy = ({ id }) => {
 
   const install = async () => {
     const accessToken = localStorage.getItem('access-token');
-    const response = await fetch('http://localhost:8181/api/deploy/install', {
+    const response = await fetch('http://abcd.staticstorm.coderush.tech/api/deploy/install', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -44,7 +34,7 @@ const Deploy = ({ id }) => {
 
   const build = async () => {
     const accessToken = localStorage.getItem('access-token');
-    const response = await fetch('http://localhost:8181/api/deploy/build', {
+    const response = await fetch('http://abcd.staticstorm.coderush.tech/api/deploy/build', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -57,7 +47,20 @@ const Deploy = ({ id }) => {
 
   const copyBuild = async () => {
     const accessToken = localStorage.getItem('access-token');
-    const response = await fetch('http://localhost:8181/api/deploy/copybuild', {
+    const response = await fetch('http://abcd.staticstorm.coderush.tech/api/deploy/copybuild', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ accessToken , projectId: id })
+    });
+    const json = await response.json();
+    // console.log(json);
+  }
+
+  const nginxConf = async () => {
+    const accessToken = localStorage.getItem('access-token');
+    const response = await fetch('http://abcd.staticstorm.coderush.tech/api/deploy/nginxconf', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -68,12 +71,27 @@ const Deploy = ({ id }) => {
     console.log(json);
   }
 
+  const reloadNginx = async () => {
+    const response = await fetch('http://abcd.staticstorm.coderush.tech/api/deploy/reloadnginx', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const json = await response.json();
+    if (json.success) {
+      window.location.href('/dashboard');
+    }
+  }
+
   useEffect(() => {
     const allThings = async () => {
       await clone();
       await install();
       await build();
       await copyBuild();
+      await nginxConf();
+      await reloadNginx();
     }
     allThings();
   }, []);
@@ -137,17 +155,6 @@ const Deploy = ({ id }) => {
                 {buildLogs.message === "Build successful" ? `🟢 ${buildLogs.message}` : `🔴 Failed to build`}
                 <br />
               </React.Fragment>}
-          </p>
-          </div>
-        <div className="mt-5 max-w-screen-xl mx-auto p-6 bg-gray-800 border border-gray-800 rounded-lg shadow">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">Assigning Domains</h5>
-          <p className="font-mono text-gray-300">
-            {domains.split("\n").map((line, index) => (
-              <React.Fragment key={index}>
-                {line}
-                <br />
-              </React.Fragment>
-            ))}
           </p>
           </div>
       </div>

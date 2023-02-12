@@ -5,7 +5,7 @@ const VerifyLogin = () => {
     const navigate = useNavigate();
 
     const login = async () => {
-        const response = await fetch('http://localhost:8181/api/auth', {
+        const response = await fetch('http://abcd.staticstorm.coderush.tech/api/auth', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

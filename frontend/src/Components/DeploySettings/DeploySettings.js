@@ -16,7 +16,7 @@ const DeploySettings = ({ id }) => {
     const deploy = async () => {
         const ia = await checkIsAvailable();
         if (ia) {
-            const response = await fetch('http://localhost:8181/api/deploy', {
+            const response = await fetch('http://abcd.staticstorm.coderush.tech/api/deploy', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
