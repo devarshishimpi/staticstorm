@@ -28,6 +28,9 @@ const DeploySettings = ({ id }) => {
             if (json.success) {
                 window.location.href = `/deploying/${json.projectId}`;
             }
+            else if (response.status === 401) {
+                window.alert(json.error);
+            }
             else {
                 window.alert("Failed");
             }

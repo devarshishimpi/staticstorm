@@ -80,7 +80,7 @@ const Deploy = ({ id }) => {
     });
     const json = await response.json();
     if (json.success) {
-      window.location.href('/dashboard');
+      window.location.href = "/dashboard";
     }
   }
 

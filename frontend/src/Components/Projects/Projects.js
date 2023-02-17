@@ -21,6 +21,56 @@ const Projects = ({ user }) => {
   useEffect(() => {
     getAllProjects();
   }, []);
+
+
+
+  const deleteProject = async (project) => {
+    const shouldI = window.confirm(`Are you sure to delete ${project.name}?`);
+    if (shouldI) {
+      const response = await fetch('http://abcd.staticstorm.coderush.tech/api/deploy/deleteconf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ projectId: project._id })
+      });
+      const json = await response.json();
+      console.log(json);
+      deleteFromDb(project);
+    }
+  }
+
+
+
+  const restartNginx = async () => {
+    const response = await fetch('http://abcd.staticstorm.coderush.tech/api/deploy/reloadnginx', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const json = await response.json();
+    if (json.success) {
+      window.location.href = "/dashboard";
+    }
+    else {
+      window.alert("Internal Server Error!");
+    }
+  }
+
+
+  const deleteFromDb = async (project) => {
+    const response = await fetch('http://abcd.staticstorm.coderush.tech/api/deploy/deleteproject', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ projectId: project._id })
+    });
+    const json = await response.json();
+    console.log(json);
+    restartNginx();
+  }
   
 
   return (
@@ -30,7 +80,7 @@ const Projects = ({ user }) => {
 
           {projects && projects.map((project) => {
             return (
-              <div>
+              <div key={project._id}>
                 <div className="rounded-2 columns-2 py-5">
                 <h5 class="mt-2 text-xl font-bold tracking-tight text-white">
                   {" "}
@@ -48,6 +98,7 @@ const Projects = ({ user }) => {
                   <button
                     type="button"
                     className="focus:outline-none text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-red-600 hover:bg-red-700 focus:ring-red-900"
+                    onClick={() => deleteProject(project)}
                   >
                     Delete
                   </button>

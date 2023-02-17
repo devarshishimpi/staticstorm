@@ -96,7 +96,7 @@ router.get('/github', (req, res) => {
         }
     ).then(response => {
         const accessToken = response.data.access_token;
-        return res.redirect(`http://localhost:3000/verifyLogin?access_token=${accessToken}`);
+        return res.redirect(`http://staticstorm.coderush.tech/verifyLogin?access_token=${accessToken}`);
     })
     .catch(error => {
         console.error(error);

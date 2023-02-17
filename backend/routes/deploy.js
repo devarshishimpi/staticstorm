@@ -39,13 +39,19 @@ router.post('/', async (req, res) => {
             return res.status(400).json({ success: false, error: "User don't exist" });
         }
         else {
+	    const alreadyExist = await ProjectSchema.findOne({ name: subDomain });
+	    if (alreadyExist) return res.status(401).json({ error: "Domain Unavailable" });
+	    const portArray = await PortSchema.find();
+	    const port = portArray[0].nextFreePort;
+
             const project = await ProjectSchema.create({
                 name: subDomain,
                 packageManager,
                 framework: frameworkPreset,
                 rootDirectory,
                 ownerId: theUser.githubId,
-                githubRepoId
+                githubRepoId,
+		port
             });
             return res.status(200).json({ success: true, projectId: project._id });
         }
@@ -546,15 +552,12 @@ router.post('/nginxconf', async (req, res) => {
     
         root /var/www/html/${theProject.name}/build;
     
-        # Add index.php to the list if you are using PHP
         index index.html index.htm index.nginx-debian.html;
     
         server_name ${theProject.name}.staticstorm.coderush.tech;
     
         location / {
-            # First attempt to serve request as file, then
-            # as directory, then fall back to displaying a 404.
-            try_files $uri $uri/ index.html;
+            try_files $uri $uri/ /index.html;
         }
       }
       `;
@@ -599,6 +602,147 @@ router.post('/nginxconf', async (req, res) => {
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.post('/deleteconf', async (req, res) => {
+  const theProject = await ProjectSchema.findById(req.body.projectId);
+  const nginxConfigPath = '/etc/nginx/sites-available/default';
+  const projectToRemove = `${theProject.name}.staticstorm.coderush.tech`;
+
+  try {
+    // Read the content of the nginx configuration file
+    let nginxConfig = await fs.readFile(nginxConfigPath, 'utf-8');
+    // console.log(`Read nginx config: ${nginxConfig}`);
+
+    // Find the two server blocks corresponding to the project to remove
+    const serverBlockRegex = new RegExp(`\\s*server {\\s*listen 80;\\s*server_name ${projectToRemove};\\s*location / {\\s*proxy_pass http://localhost:${theProject.port};[^}]*}\\s*}`, 'g');
+    const matches = nginxConfig.match(serverBlockRegex) || [];
+    console.log(`Found ${matches.length} matches: ${matches}`);
+
+    const serverBlocksToRemove = matches.join('');
+
+    // Remove the server blocks from the nginx configuration file content
+    nginxConfig = nginxConfig.replace(serverBlocksToRemove, '');
+    // console.log(`Modified nginx config: ${nginxConfig}`);
+
+    // Write the modified content back to the nginx configuration file
+    await fs.writeFile(nginxConfigPath, nginxConfig);
+    // console.log(`Wrote modified nginx config to ${nginxConfigPath}`);
+
+    console.log(`Removed server blocks for project "${projectToRemove}" from nginx config.`);
+  } catch (err) {
+    console.error(`Error removing project "${projectToRemove}" from nginx config: ${err}`);
+    return res.json({ success: false, err });
+  }
+
+
+
+
+
+
+  try {
+    // Read the content of the nginx configuration file
+    let nginxConfig = await fs.readFile(nginxConfigPath, 'utf-8');
+
+    // Find the server block corresponding to the project to remove
+    const serverBlockRegex = new RegExp(`\\s*server {\\s*listen ${theProject.port} default_server;\\s*listen \\[::\\]:${theProject.port} default_server;\\s*root /var/www/html/${theProject.name}/build;\\s*index index.html index.htm index.nginx-debian.html;\\s*server_name ${projectToRemove};\\s*location / {\\s*try_files \\$uri \\$uri/ /index.html;\\s*}\\s*}`, 'g');
+    const matches = nginxConfig.match(serverBlockRegex) || [];
+
+    // Remove the server block from the nginx configuration file content
+    const serverBlockToRemove = matches.join('');
+    nginxConfig = nginxConfig.replace(serverBlockToRemove, '');
+
+    // Write the modified content back to the nginx configuration file
+    await fs.writeFile(nginxConfigPath, nginxConfig);
+
+    console.log(`Removed server block for project "${projectToRemove}" from nginx config.`);
+
+    return res.json({ success: true });
+
+  } catch (err) {
+    console.error(`Error removing project "${projectToRemove}" from nginx config: ${err}`);
+    return res.json({ success: false, err });
+  }
+  
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.post('/deleteproject', async (req, res) => {
+    const theProject = await ProjectSchema.findById(req.body.projectId);
+
+    await fs.rmdir(`/projects/${theProject.name}`, { recursive: true });
+    await fs.rmdir(`/var/www/html/${theProject.name}`, { recursive: true });
+
+    if (theProject) {
+        await theProject.delete();
+        return res.json({ success: true });
+    }
+    res.json({ success: false });
+});
 
 
 

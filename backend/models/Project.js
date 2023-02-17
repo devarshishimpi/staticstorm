@@ -25,6 +25,10 @@ const ProjectSchema = new Schema({
     ownerId: {
         type: String,
         required: true
+    },
+    port: {
+	type: Number,
+	required: true
     }
 }, {timestamps: true});
 

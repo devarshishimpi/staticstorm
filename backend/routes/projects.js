@@ -32,4 +32,29 @@ router.post('/', async (req, res) => {
     });
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.post('/delete', async (req, res) => {
+	res.json({ success: false });
+    //const theProject = await ProjectSchema.findById(req.body.projectId);
+
+    //if (theProject) {
+    //    await theProject.delete();
+    //    return res.json({ success: true });
+    //}
+    //res.json({ success: false });
+});
+
 module.exports = router;
