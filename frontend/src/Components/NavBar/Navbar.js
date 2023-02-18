@@ -1,20 +1,63 @@
+import React, { useEffect, useState } from 'react';
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 
-const NavBar = () => {
+
+const Navbar = (props) => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [imageURI, setImageURI] = useState("");
+
+    const location = useLocation();
+
+    const navigate = useNavigate();
+
+    const getUser = async () => {
+      const authtoken = localStorage.getItem('auth-token');
+      const response = await fetch('http://localhost:8181/api/auth/getuser' ,{
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': authtoken
+        }
+      });
+      const json = await response.json();
+
+      if (json.fname === "Default" && json.lname === "Name" && location.pathname !== '/') {
+        navigate('/user/new');
+      }
+      // console.log(json);
+      setImageURI(json.imageURI);
+    }
+
+    useEffect(() => {
+      if (localStorage.getItem('auth-token')) {
+        setIsLoggedIn(true);
+        getUser();
+      }
+      else {
+        setIsLoggedIn(false);
+      }
+    }, []);
+    
     const navigation = [
-        { name: 'Dashboard', href: '#', current: true },
-        { name: 'Team', href: '#', current: false },
-        { name: 'Projects', href: '#', current: false },
-        { name: 'Calendar', href: '#', current: false },
+        { name: 'Home', href: '/', current: (props.focus === "home") },
+        { name: 'Features', href: '/#features', current: false },
+        { name: 'Dashboard', href: '/dashboard', current: (props.focus === "dashboard") },
+        { name: 'Github', href: 'https://github.com/devarshishimpi/staticstormhackathon', current: false },
       ]
       
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-      const navigate = useNavigate();
+
+      const signout = () => {
+        localStorage.removeItem('auth-token');
+        window.location.href = "http://localhost:3000";
+        window.location.replace("http://localhost:3000");
+      }
+      
   return (
     <>
         <Disclosure as="nav" className="bg-gray-800">
@@ -37,13 +80,13 @@ const NavBar = () => {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
+                    src="https://res.cloudinary.com/dvstech/image/upload/v1676718021/staticstormhackathonfiles/staticstormlogo_ukdxwt.png"
+                    alt="Devcode"
                   />
                   <img
                     className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
+                    src="https://res.cloudinary.com/dvstech/image/upload/v1676718021/staticstormhackathonfiles/staticstormlogo_ukdxwt.png"
+                    alt="Devcode"
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
@@ -65,13 +108,15 @@ const NavBar = () => {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
+                {isLoggedIn?
+                <>
+                {/*<button
                   type="button"
                   className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                </button>*/}
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
@@ -80,7 +125,7 @@ const NavBar = () => {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src={imageURI}
                         alt=""
                       />
                     </Menu.Button>
@@ -98,39 +143,41 @@ const NavBar = () => {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="/"
+                            href="/dashboard"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
-                            Your Profile
+                            Dashboard
                           </a>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="/"
+                            href="/newproject"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
-                            Settings
+                            New Project
                           </a>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <button
-                            onClick={() => {
-                              localStorage.removeItem('access-token');
-                              navigate('/login');
-                            }}
-                            className={classNames(active ? 'bg-gray-100' : '', 'px-4 py-2 text-sm text-gray-700 w-full flex justify-start')}
+                            onClick={signout}
+                            className={classNames(active ? 'bg-gray-100' : '', 'px-4 flex w-[100%] py-2 text-sm text-gray-700')}
                           >
-                            Logout
+                            Sign out
                           </button>
                         )}
                       </Menu.Item>
                     </Menu.Items>
                   </Transition>
-                </Menu>
+                </Menu> </>
+                :
+                <>
+                  <Link to={'/login'} type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Login</Link>
+                </>
+                }
               </div>
             </div>
           </div>
@@ -157,7 +204,7 @@ const NavBar = () => {
       )}
     </Disclosure>
     </>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default Navbar
