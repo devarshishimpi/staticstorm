@@ -13,30 +13,28 @@ const Navbar = (props) => {
 
     const navigate = useNavigate();
 
+        console.log("Hi");
     const getUser = async () => {
-      const authtoken = localStorage.getItem('auth-token');
-      const response = await fetch('http://localhost:8181/api/auth/getuser' ,{
-        method: 'GET',
+      const accesstoken = localStorage.getItem('access-token');
+      const response = await fetch('http://abcd.staticstorm.coderush.tech/api/auth/getuser' ,{
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'auth-token': authtoken
-        }
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ accessToken: accesstoken })
       });
       const json = await response.json();
-
-      if (json.fname === "Default" && json.lname === "Name" && location.pathname !== '/') {
-        navigate('/user/new');
-      }
-      // console.log(json);
-      setImageURI(json.imageURI);
+      setImageURI(json);
     }
 
     useEffect(() => {
-      if (localStorage.getItem('auth-token')) {
+      if (localStorage.getItem('access-token')) {
         setIsLoggedIn(true);
+              console.log("Hi, you're logged in!!");
         getUser();
       }
       else {
+              console.log("no, you are not logged in");
         setIsLoggedIn(false);
       }
     }, []);
@@ -53,9 +51,9 @@ const Navbar = (props) => {
       }
 
       const signout = () => {
-        localStorage.removeItem('auth-token');
-        window.location.href = "http://localhost:3000";
-        window.location.replace("http://localhost:3000");
+        localStorage.removeItem('access-token');
+        window.location.href = "/";
+        window.location.replace("/");
       }
       
   return (
@@ -125,7 +123,7 @@ const Navbar = (props) => {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src={imageURI}
+                        src={`https://ui-avatars.com/api/?name=${imageURI}&background=random`}
                         alt=""
                       />
                     </Menu.Button>

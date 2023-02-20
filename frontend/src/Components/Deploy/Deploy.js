@@ -71,6 +71,20 @@ const Deploy = ({ id }) => {
     console.log(json);
   }
 
+
+  const configureWebhook = async () => {
+    const accessToken = localStorage.getItem('access-token');
+    const response = await fetch('http://abcd.staticstorm.coderush.tech/api/deploy/configurewebhook', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ accessToken , projectId: id })
+    });
+    const json = await response.json();
+    console.log(json);
+  }
+
   const reloadNginx = async () => {
     const response = await fetch('http://abcd.staticstorm.coderush.tech/api/deploy/reloadnginx', {
       method: 'POST',
@@ -91,6 +105,7 @@ const Deploy = ({ id }) => {
       await build();
       await copyBuild();
       await nginxConf();
+      await configureWebhook();
       await reloadNginx();
     }
     allThings();

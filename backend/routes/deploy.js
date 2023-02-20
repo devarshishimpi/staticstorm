@@ -770,6 +770,290 @@ router.post('/deleteproject', async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+router.post('/configurewebhook', async (req, res) => {
+    const theProject = await ProjectSchema.findById(req.body.projectId);
+    const theUser = await UserSchema.findOne({ githubId: theProject.ownerId });
+    // Define the repository owner, repository name, and access token
+    const owner = theUser.githubLogin;
+    const repoId = theProject.githubRepoId;
+    const accessToken = req.body.accessToken;
+    
+    
+    // Make the HTTP request to get the repository information
+    axios.get(`https://api.github.com/repositories/${repoId}`, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'User-Agent': 'axios',
+      },
+    })
+    .then(response => {
+      const repoName = response.data.name;
+
+      // Define the payload for the webhook creation request
+      const payload = {
+        name: 'web',
+        config: {
+          url: 'http://abcd.staticstorm.coderush.tech/api/deploy/triggerwebhook',
+          content_type: 'json',
+        },
+        events: ['push'],
+        active: true,
+      };
+
+      // Make the HTTP request to create the webhook
+      axios.post(`https://api.github.com/repos/${owner}/${repoName}/hooks`, payload, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+          'User-Agent': 'axios',
+        },
+      })
+      .then(response => {
+        console.log(`Webhook created: ${response.data.url}`);
+        res.json({ success: true });
+      })
+      .catch(error => {
+        console.error(`Error creating webhook: ${error}`);
+        res.json({ success: false });
+      });
+    })
+    .catch(error => {
+      console.error(`Error getting repository information: ${error}`);
+      res.json({ success: false });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.post('/triggerwebhook', async (req, res) => {
+  // Retrieve the payload data from the request body
+  const payload = req.body;
+  console.log(`Received webhook for ${payload.repository.full_name}`);
+
+
+  const theProject = await ProjectSchema.findOne({ githubRepoId: payload.repository.id });
+
+
+  process.chdir(`/projects/${theProject.name}/${payload.repository.name}`);
+
+  const pull = spawn('git', ['pull']);
+
+  let logs1 = '';
+
+  pull.stdout.on('data', data => {
+    logs1 += data.toString();
+  });
+
+  pull.stderr.on('data', data => {
+    logs1 += data.toString();
+  });
+
+  pull.on('close', code => {
+    console.log(logs1);
+    if (code === 0) {
+
+
+
+
+
+
+      process.chdir(`/projects/${theProject.name}/${payload.repository.name}`);
+
+      const install = spawn('npm', ['install', '--legacy-peer-deps', '-C', theProject.rootDirectory]);
+
+      let logs2 = '';
+
+      install.stdout.on('data', data => {
+        logs2 += data.toString();
+      });
+
+      install.stderr.on('data', data => {
+        logs2 += data.toString();
+      });
+
+      install.on('close', code => {
+        console.log(logs2);
+        if (code === 0) {
+
+
+
+
+
+
+
+
+          process.chdir(`/projects/${theProject.name}/${payload.repository.name}`);
+
+          const build = spawn('npm', ['run', 'build', '-C', theProject.rootDirectory]);
+        
+          let logs4 = '';
+        
+          build.stdout.on('data', data => {
+            logs4 += data.toString();
+          });
+        
+          build.stderr.on('data', data => {
+            logs4 += data.toString();
+          });
+        
+          build.on('close', code => {
+            console.log(logs4);
+            if (code === 0) {
+              
+
+
+
+
+
+
+
+
+              const folderName = theProject.name; // name of the new folder
+              const path = '/var/www/html'; // path to the parent directory of the new folder
+              const folderPath = `${path}/${folderName}`; // full path to the new folder
+              const mkdir = spawn('mkdir', [folderPath]); // create the new folder
+          
+              mkdir.on('close', () => {
+                process.chdir(`/projects/${theProject.name}/${payload.repository.name}`); // change the current working directory to the new folder
+                process.chdir(theProject.rootDirectory); // change the current working directory to the new folder
+                const copyBuild = spawn('cp', ['-rf', 'build', folderPath]);
+          
+                let logs3 = '';
+          
+                copyBuild.stdout.on('data', data => {
+                  logs3 += data.toString();
+                });
+          
+                copyBuild.stderr.on('data', data => {
+                  logs3 += data.toString();
+                });
+          
+                copyBuild.on('close', code => {
+                  if (code === 0) {
+                    console.log(logs3);
+    
+                    return res.status(200).json({
+                      logs3,
+                      message: 'Copied Successfully'
+                    });
+                  } else {
+                    return res.status(500).json({
+                      logs3,
+                      message: 'Failed to copy'
+                    });
+                  }
+                });
+              });
+
+
+
+
+
+
+
+
+
+
+
+
+
+            } else {
+              return res.status(500).json({
+                logs4,
+                message: 'Build Failed'
+              });
+            }
+          });
+
+
+
+
+
+
+        } else {
+          return res.status(500).json({
+            logs2,
+            message: 'Failed to install dependencies'
+          });
+        }
+      });
+
+
+
+
+
+
+
+    } else {
+      console.log(logs1);
+      return res.status(500).json({
+        logs1,
+        message: 'Failed to pull new code'
+      });
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.post('/reloadnginx', async (req, res) => {
   const reload = spawn('systemctl', ['restart', 'nginx']);
 
