@@ -1,5 +1,8 @@
+require('dotenv').config();
+
 const mongoose = require('mongoose');
-const mongoURI = "mongodb+srv://hello:abhi143riya@cluster0.p7oghxx.mongodb.net/?retryWrites=true&w=majority";
+
+const mongoURI = process.env.mongoURI;
 
 const connectToMongo = () => {
     mongoose.connect(mongoURI, { dbName: 'staticstorm' }, () => {

@@ -7,8 +7,9 @@ var jwt = require('jsonwebtoken');
 // const fetchuser = require('../middleware/fetchuser');
 const axios = require('axios');
 const qs = require('querystring');
+require('dotenv').config();
 
-const JWT_SECRET = "AbhiIsASexyFuckin*GoodB$oy";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 
 
@@ -79,8 +80,8 @@ router.post('/', async (req, res) => {
 
 router.get('/github', (req, res) => {
     const code = req.query.code;
-    const clientId = '636a2eda665f3bc395b4';
-    const clientSecret = '0836b515ce94fb7333ea914a4f7bb0136bf4a19b';
+    const clientId = process.env.GITHUB_CLIENT_ID;
+    const clientSecret = process.env.GITHUB_CLIENT_SECRET;
 
     axios.post(
         'https://github.com/login/oauth/access_token',

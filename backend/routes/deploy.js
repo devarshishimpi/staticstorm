@@ -11,8 +11,9 @@ const axios = require('axios');
 const qs = require('querystring');
 const { spawn } = require('child_process');
 const { promises: fs } = require('fs');
+require('dotenv').config();
 
-const JWT_SECRET = "AbhiIsASexyFuckin*GoodB$oy";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 
 
