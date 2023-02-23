@@ -92,7 +92,7 @@ To deploy the frontend. Make a new Linux Linode. Install Nginx and NodeJS. Then 
 
 Edit the file and change the following section to this
 
-```
+```nginx
     server {
             listen 80 default_server;
             listen [::]:80 default_server;
