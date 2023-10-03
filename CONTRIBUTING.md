@@ -1,21 +1,19 @@
-MIT License
+# Contributing
 
-Copyright (c) 2023 Devarshi Shimpi
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Please note we have a [Code of Conduct](CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## Issue Process
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+1. Before creating a new issue, search existing issues to ensure your topic or concern hasn't been discussed before. If you find a related issue, you can join the discussion there.
+2. If you can't find an existing issue, create a new one, providing a clear and descriptive title, as well as a detailed description of the problem or feature request.
+3. Engage in constructive discussions on the issue, providing additional context or information when needed.
+
+## Pull Request Process
+
+1. Make sure that you are assigned to the GitHub issue related to your Pull Request (PR).
+2. Ensure any install or build dependencies are removed before the end of the layer when doing a build.
+3. Update `README.md` with details of changes to the interface: this includes new environment variables, exposed ports, useful file locations, and container parameters.
+4. Increase the version numbers in any examples files and the `README.md` to the new version that this PR would represent.
+5. You may merge the PR once you have gained approval, or you may request approval from the maintainers who have write access to the repository.

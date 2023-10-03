@@ -6,44 +6,100 @@
 
 <hr>
 
+<!--
 Visit At <a href="http://staticstorm.coderush.tech" target="_blank">staticstorm.coderush.tech</a>
+-->
 
-## Deployment
+## 🚀 Getting Started
 
-### Deploying Backend
+### Deployment
 
-To deploy the backend. Make a new Linux Linode. Install Nginx and NodeJS. Then run the following commands.
+To deploy both the frontend and backend, follow these steps:
 
-<hr>
+#### Prerequisites
 
-```bash
-  git clone https://github.com/devarshishimpi/staticstormhackathon
-```
+Before you begin, ensure that you have the following prerequisites in place:
 
-```bash
-  cd backend
-```
+- Linux Machine (eg: Ubuntu)
+- Nodejs v16 or above
+- Nginx Server
 
-```bash
-  npm install
-```
+#### Once you are done with that you may proceed to deploy the application:
 
-```bash
-  sudo cp -rf . /var/www/html
-```
+1. Clone the project repository:
 
 ```bash
-  sudo vim /etc/nginx/sites-available/default
+git clone https://github.com/devarshishimpi/staticstorm
+cd staticstorm
 ```
 
-Edit the file and change the following section to this
+2. Navigate to the frontend directory:
+
+```bash
+cd frontend
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+```
+
+4. Build the frontend:
+
+```bash
+npm run build
+```
+
+5. Copy the frontend files to the server's HTML directory:
+6.
+
+```bash
+sudo cp -rf build /var/www/html
+```
+
+6. Navigate to the server directory:
+
+```bash
+cd ../server
+```
+
+7. Install backend dependencies:
+
+```bash
+npm install
+```
+
+8. Copy the backend files to the server's HTML directory:
+
+```bash
+sudo cp -rf . /var/www/html
+```
+
+9. Edit the Nginx configuration file:
+
+```bash
+sudo vim /etc/nginx/sites-available/default
+```
+
+10. Update the Nginx configuration to include both frontend and backend as separate locations:
 
 ```nginx
 server {
-    listen 80;
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+
+    index index.html index.htm index.nginx-debian.html;
+
     server_name _;
 
     location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api/ {
         proxy_pass http://localhost:8181;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
@@ -52,65 +108,12 @@ server {
 }
 ```
 
-```bash
-  sudo service nginx restart
-```
- 
-Then go to `http://yourip:30001`
-
-
-
-### Deploying Frontend
-
-To deploy the frontend. Make a new Linux Linode. Install Nginx and NodeJS. Then run the following commands.
-
-<hr>
+11. Restart Nginx to apply the configuration changes\*\*:
 
 ```bash
-  git clone https://github.com/devarshishimpi/staticstormhackathon
+sudo service nginx restart
 ```
 
-```bash
-  cd frontend
-```
+12. Access Your Application
 
-```bash
-  npm install
-```
-
-```bash
-  npm run build
-```
-
-```bash
-  sudo cp -rf build /var/www/html
-```
-
-```bash
-  sudo vim /etc/nginx/sites-available/default
-```
-
-Edit the file and change the following section to this
-
-```nginx
-    server {
-            listen 80 default_server;
-            listen [::]:80 default_server;
-
-            root /var/www/html/build;
-
-            index index.html index.htm index.nginx-debian.html;
-
-            server_name _;
-
-            location / {
-                    try_files $uri $uri/ /index.html;
-            }
-    }
-```
-
-```bash
-  sudo service nginx restart
-```
-
-Navigate to `http://youripaddress`
+You can now access your application in a web browser by navigating to `http://youripaddress`. The frontend will be served from the root, and the backend API will be available at `http://youripaddress/api`.
