@@ -1,0 +1,24 @@
+{
+  "name": "staticstorm",
+  "version": "0.8.0-beta",
+  "description": "Unleash the power of simple, fast and secure websites.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --check --ignore-path .gitignore .",
+    "format:fix": "prettier --write --ignore-path .gitignore ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devarshishimpi/staticstorm.git"
+  },
+  "author": "Devarshi Shimpi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devarshishimpi/staticstorm/issues"
+  },
+  "homepage": "https://github.com/devarshishimpi/staticstorm#readme",
+  "devDependencies": {
+    "prettier": "3.0.3"
+  }
+}
