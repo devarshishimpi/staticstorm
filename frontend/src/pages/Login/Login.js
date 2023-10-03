@@ -7,20 +7,16 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem('access-token')) {
-      navigate('/dashboard');
+    if (localStorage.getItem("access-token")) {
+      navigate("/dashboard");
     }
   }, []);
-  
 
   return (
     <>
       <Helmet>
         <title>StaticStorm | Login</title>
-        <meta
-          name="description"
-          content=""
-        />
+        <meta name="description" content="" />
       </Helmet>
       <GitLogin />
     </>

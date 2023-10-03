@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
-import Deploy from "../../Components/Deploy/Deploy"
+import Deploy from "../../Components/Deploy/Deploy";
 
 const NewProject = () => {
   const { id } = useParams();
@@ -9,14 +9,10 @@ const NewProject = () => {
     <div className="flex items-center justify-center">
       <Helmet>
         <title>StaticStorm | Deploying</title>
-        <meta
-          name="description"
-          content=""
-        />
+        <meta name="description" content="" />
       </Helmet>
 
       <Deploy id={id} />
-
     </div>
   );
 };
