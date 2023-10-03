@@ -1,6 +1,6 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
+  "name": "staticstorm-server",
+  "version": "0.8.0-beta",
   "description": "",
   "main": "index.js",
   "scripts": {
