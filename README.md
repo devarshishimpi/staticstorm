@@ -7,7 +7,7 @@
 <hr>
 
 <!--
-Visit At <a href="http://staticstorm.coderush.tech" target="_blank">staticstorm.coderush.tech</a>
+Visit At <a href="http://staticstorm.repocraft.com" target="_blank">staticstorm.repocraft.com</a>
 -->
 
 ## 🚀 Getting Started
@@ -158,7 +158,7 @@ server {
     listen 80 default_server;
     listen [::]:80 default_server;
 
-    root /var/www/html;
+    root /var/www/html/build;
 
     index index.html index.htm index.nginx-debian.html;
 
@@ -174,7 +174,15 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
+
+    autoindex off;
+
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+        expires 7d;  # Cache these static assets for 7 days (adjust as needed)
+        add_header Cache-Control "public, max-age=604800, immutable";
+    }
 }
+
 ```
 
 11. Restart Nginx to apply the configuration changes:

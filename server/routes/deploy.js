@@ -330,13 +330,13 @@ router.post("/nginxconf", async (req, res) => {
       server {
         listen ${nextFreePort} default_server;
         listen [::]:${nextFreePort} default_server;
-    
+
         root /var/www/html/${theProject.name}/build;
-    
+
         index index.html index.htm index.nginx-debian.html;
-    
-        server_name ${theProject.name}.staticstorm.coderush.tech;
-    
+
+        server_name ${theProject.name}.staticstorm.repocraft.com;
+
         location / {
             try_files $uri $uri/ /index.html;
         }
@@ -345,8 +345,8 @@ router.post("/nginxconf", async (req, res) => {
       const newServerBlock2 = `
         server {
           listen 80;
-          server_name ${theProject.name}.staticstorm.coderush.tech;
-      
+          server_name ${theProject.name}.staticstorm.repocraft.com;
+
           location / {
               proxy_pass http://localhost:${nextFreePort};
               proxy_set_header Host $host;
@@ -384,7 +384,7 @@ router.post("/nginxconf", async (req, res) => {
 router.post("/deleteconf", async (req, res) => {
   const theProject = await ProjectSchema.findById(req.body.projectId);
   const nginxConfigPath = "/etc/nginx/sites-available/default";
-  const projectToRemove = `${theProject.name}.staticstorm.coderush.tech`;
+  const projectToRemove = `${theProject.name}.staticstorm.repocraft.com`;
 
   try {
     // Read the content of the nginx configuration file
@@ -486,7 +486,7 @@ router.post("/configurewebhook", async (req, res) => {
       const payload = {
         name: "web",
         config: {
-          url: "http://abcd.staticstorm.coderush.tech/api/deploy/triggerwebhook",
+          url: "http://api.staticstorm.repocraft.com/api/deploy/triggerwebhook",
           content_type: "json",
         },
         events: ["push"],

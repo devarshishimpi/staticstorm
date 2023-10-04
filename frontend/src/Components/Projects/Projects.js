@@ -7,7 +7,7 @@ const Projects = ({ user }) => {
 
   const getAllProjects = async () => {
     const response = await fetch(
-      "http://abcd.staticstorm.coderush.tech/api/projects",
+      "http://api.staticstorm.repocraft.com/api/projects",
       {
         method: "POST",
         headers: {
@@ -31,7 +31,7 @@ const Projects = ({ user }) => {
     const shouldI = window.confirm(`Are you sure to delete ${project.name}?`);
     if (shouldI) {
       const response = await fetch(
-        "http://abcd.staticstorm.coderush.tech/api/deploy/deleteconf",
+        "http://api.staticstorm.repocraft.com/api/deploy/deleteconf",
         {
           method: "POST",
           headers: {
@@ -48,7 +48,7 @@ const Projects = ({ user }) => {
 
   const restartNginx = async () => {
     const response = await fetch(
-      "http://abcd.staticstorm.coderush.tech/api/deploy/reloadnginx",
+      "http://api.staticstorm.repocraft.com/api/deploy/reloadnginx",
       {
         method: "POST",
         headers: {
@@ -66,7 +66,7 @@ const Projects = ({ user }) => {
 
   const deleteFromDb = async (project) => {
     const response = await fetch(
-      "http://abcd.staticstorm.coderush.tech/api/deploy/deleteproject",
+      "http://api.staticstorm.repocraft.com/api/deploy/deleteproject",
       {
         method: "POST",
         headers: {
@@ -91,11 +91,11 @@ const Projects = ({ user }) => {
                   <div className="rounded-2 columns-2 py-5">
                     <h5 class="mt-2 text-xl font-bold tracking-tight text-white">
                       {" "}
-                      {project.name}.staticstorm.coderush.tech
+                      {project.name}.staticstorm.repocraft.com
                     </h5>
                     <div class="float-right">
                       <a
-                        href={`http://${project.name}.staticstorm.coderush.tech`}
+                        href={`http://${project.name}.staticstorm.repocraft.com`}
                         target="_blank"
                         type="button"
                         class="text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800 cursor-pointer"

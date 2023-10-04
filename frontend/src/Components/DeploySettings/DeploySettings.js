@@ -17,7 +17,7 @@ const DeploySettings = ({ id }) => {
     const ia = await checkIsAvailable();
     if (ia) {
       const response = await fetch(
-        "http://abcd.staticstorm.coderush.tech/api/deploy",
+        "http://api.staticstorm.repocraft.com/api/deploy",
         {
           method: "POST",
           headers: {
@@ -59,7 +59,7 @@ const DeploySettings = ({ id }) => {
                   <h5 className="mb-6 text-lg tracking-tight text-white">
                     The same will be your subdomain ( i.e.{" "}
                     <strong>{!subDomain ? "hello-world" : subDomain}</strong>
-                    .staticstorm.coderush.tech )
+                    .staticstorm.repocraft.com )
                   </h5>
                   <input
                     style={{ marginBottom: 10 }}
