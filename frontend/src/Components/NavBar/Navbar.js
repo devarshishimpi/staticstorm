@@ -18,7 +18,6 @@ const Navbar = (props) => {
     const response = await fetch(
       "http://staticstorm.repocraft.com/api/auth/getuser",
       {
-        mode: 'cors',
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -11,7 +11,6 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://staticstorm.repocraft.com/api/deploy/clone",
       {
-        mode: 'cors',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +27,6 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://staticstorm.repocraft.com/api/deploy/install",
       {
-        mode: 'cors',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +43,6 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://staticstorm.repocraft.com/api/deploy/build",
       {
-        mode: 'cors',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +59,6 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://staticstorm.repocraft.com/api/deploy/copybuild",
       {
-        mode: 'cors',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +75,6 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://staticstorm.repocraft.com/api/deploy/nginxconf",
       {
-        mode: 'cors',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -96,7 +91,6 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://staticstorm.repocraft.com/api/deploy/configurewebhook",
       {
-        mode: 'cors',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -112,7 +106,6 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://staticstorm.repocraft.com/api/deploy/reloadnginx",
       {
-        mode: 'cors',
         method: "POST",
         headers: {
           "Content-Type": "application/json",

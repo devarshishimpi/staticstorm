@@ -5,17 +5,13 @@ const VerifyLogin = () => {
   const navigate = useNavigate();
 
   const login = async () => {
-    const response = await fetch(
-      "http://staticstorm.repocraft.com/api/auth",
-      {
-        mode: 'cors',
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ accessToken }),
+    const response = await fetch("http://staticstorm.repocraft.com/api/auth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({ accessToken }),
+    });
 
     const json = await response.json();
     if (json.success) {
