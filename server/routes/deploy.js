@@ -488,7 +488,7 @@ router.post("/configurewebhook", async (req, res) => {
       const payload = {
         name: "web",
         config: {
-          url: "http://api.staticstorm.repocraft.com/api/deploy/triggerwebhook",
+          url: "http://staticstorm.repocraft.com/api/deploy/triggerwebhook",
           content_type: "json",
         },
         events: ["push"],

@@ -9,7 +9,7 @@ const Deploy = ({ id }) => {
   const clone = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/clone",
+      "http://staticstorm.repocraft.com/api/deploy/clone",
       {
         mode: 'cors',
         method: "POST",
@@ -26,7 +26,7 @@ const Deploy = ({ id }) => {
   const install = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/install",
+      "http://staticstorm.repocraft.com/api/deploy/install",
       {
         mode: 'cors',
         method: "POST",
@@ -43,7 +43,7 @@ const Deploy = ({ id }) => {
   const build = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/build",
+      "http://staticstorm.repocraft.com/api/deploy/build",
       {
         mode: 'cors',
         method: "POST",
@@ -60,7 +60,7 @@ const Deploy = ({ id }) => {
   const copyBuild = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/copybuild",
+      "http://staticstorm.repocraft.com/api/deploy/copybuild",
       {
         mode: 'cors',
         method: "POST",
@@ -77,7 +77,7 @@ const Deploy = ({ id }) => {
   const nginxConf = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/nginxconf",
+      "http://staticstorm.repocraft.com/api/deploy/nginxconf",
       {
         mode: 'cors',
         method: "POST",
@@ -94,7 +94,7 @@ const Deploy = ({ id }) => {
   const configureWebhook = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/configurewebhook",
+      "http://staticstorm.repocraft.com/api/deploy/configurewebhook",
       {
         mode: 'cors',
         method: "POST",
@@ -110,7 +110,7 @@ const Deploy = ({ id }) => {
 
   const reloadNginx = async () => {
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/reloadnginx",
+      "http://staticstorm.repocraft.com/api/deploy/reloadnginx",
       {
         mode: 'cors',
         method: "POST",

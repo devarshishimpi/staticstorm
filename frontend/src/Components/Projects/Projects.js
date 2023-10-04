@@ -7,7 +7,7 @@ const Projects = ({ user }) => {
 
   const getAllProjects = async () => {
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/projects",
+      "http://staticstorm.repocraft.com/api/projects",
       {
         mode: 'cors',
         method: "POST",
@@ -32,7 +32,7 @@ const Projects = ({ user }) => {
     const shouldI = window.confirm(`Are you sure to delete ${project.name}?`);
     if (shouldI) {
       const response = await fetch(
-        "http://api.staticstorm.repocraft.com/api/deploy/deleteconf",
+        "http://staticstorm.repocraft.com/api/deploy/deleteconf",
         {
           method: "POST",
           headers: {
@@ -49,7 +49,7 @@ const Projects = ({ user }) => {
 
   const restartNginx = async () => {
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/reloadnginx",
+      "http://staticstorm.repocraft.com/api/deploy/reloadnginx",
       {
         method: "POST",
         headers: {
@@ -67,7 +67,7 @@ const Projects = ({ user }) => {
 
   const deleteFromDb = async (project) => {
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/deleteproject",
+      "http://staticstorm.repocraft.com/api/deploy/deleteproject",
       {
         method: "POST",
         headers: {
