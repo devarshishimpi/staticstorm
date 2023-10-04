@@ -10,7 +10,7 @@ const Dashboard = () => {
 
   const validateAccessToken = async () => {
     const response = await fetch("https://api.github.com/user", {
-      mode: 'same-origin',
+      mode: "no-cors",
       method: "GET",
       headers: {
         Authorization: `Token ${localStorage.getItem("access-token")}`,

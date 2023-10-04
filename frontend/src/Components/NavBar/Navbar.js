@@ -16,9 +16,9 @@ const Navbar = (props) => {
   const getUser = async () => {
     const accesstoken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://staticstorm.repocraft.com/api/auth/getuser",
+      "http://api.staticstorm.repocraft.com/api/auth/getuser",
       {
-        mode: 'same-origin',
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
