@@ -5,6 +5,8 @@ const ProjectSchema = require("../models/Project");
 // const { body, validationResult } = require('express-validator');
 const axios = require("axios");
 
+router.use(cors());
+router.options("*", cors());
 // Get All Projects
 router.post("/", async (req, res) => {
   axios

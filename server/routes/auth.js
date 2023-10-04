@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const UserSchema = require("../models/User");
+const cors = require("cors");
 // const { body, validationResult } = require('express-validator');
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
@@ -11,6 +12,8 @@ require("dotenv").config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
+router.use(cors());
+router.options("*", cors());
 router.post("/", async (req, res) => {
   axios
     .get("https://api.github.com/user", {

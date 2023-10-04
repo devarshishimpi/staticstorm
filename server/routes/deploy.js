@@ -15,6 +15,8 @@ require("dotenv").config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
+router.use(cors());
+router.options("*", cors());
 router.post("/", async (req, res) => {
   const {
     frameworkPreset,
