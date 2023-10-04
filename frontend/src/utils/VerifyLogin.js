@@ -6,7 +6,7 @@ const VerifyLogin = () => {
 
   const login = async () => {
     const response = await fetch(
-      "http://abcd.staticstorm.coderush.tech/api/auth",
+      "http://api.staticstorm.repocraft.com/api/auth",
       {
         method: "POST",
         headers: {
