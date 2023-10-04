@@ -11,7 +11,7 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://api.staticstorm.repocraft.com/api/deploy/clone",
       {
-        mode: "cors",
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +28,7 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://api.staticstorm.repocraft.com/api/deploy/install",
       {
-        mode: "cors",
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://api.staticstorm.repocraft.com/api/deploy/build",
       {
-        mode: "cors",
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +62,7 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://api.staticstorm.repocraft.com/api/deploy/copybuild",
       {
-        mode: "cors",
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +79,7 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://api.staticstorm.repocraft.com/api/deploy/nginxconf",
       {
-        mode: "cors",
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -96,7 +96,7 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://api.staticstorm.repocraft.com/api/deploy/configurewebhook",
       {
-        mode: "cors",
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -112,7 +112,7 @@ const Deploy = ({ id }) => {
     const response = await fetch(
       "http://api.staticstorm.repocraft.com/api/deploy/reloadnginx",
       {
-        mode: "cors",
+        mode: "no-cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
