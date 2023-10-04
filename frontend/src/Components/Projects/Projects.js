@@ -9,7 +9,7 @@ const Projects = ({ user }) => {
     const response = await fetch(
       "http://api.staticstorm.repocraft.com/api/projects",
       {
-        mode: "no-cors",
+        mode: 'cors',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
