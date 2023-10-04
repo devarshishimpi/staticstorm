@@ -9,9 +9,9 @@ const Deploy = ({ id }) => {
   const clone = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/clone",
+      "http://staticstorm.repocraft.com/api/deploy/clone",
       {
-        mode: "no-cors",
+        mode: 'same-origin',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,9 +26,9 @@ const Deploy = ({ id }) => {
   const install = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/install",
+      "http://staticstorm.repocraft.com/api/deploy/install",
       {
-        mode: "no-cors",
+        mode: 'same-origin',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,9 +43,9 @@ const Deploy = ({ id }) => {
   const build = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/build",
+      "http://staticstorm.repocraft.com/api/deploy/build",
       {
-        mode: "no-cors",
+        mode: 'same-origin',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,9 +60,9 @@ const Deploy = ({ id }) => {
   const copyBuild = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/copybuild",
+      "http://staticstorm.repocraft.com/api/deploy/copybuild",
       {
-        mode: "no-cors",
+        mode: 'same-origin',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,9 +77,9 @@ const Deploy = ({ id }) => {
   const nginxConf = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/nginxconf",
+      "http://staticstorm.repocraft.com/api/deploy/nginxconf",
       {
-        mode: "no-cors",
+        mode: 'same-origin',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -94,9 +94,9 @@ const Deploy = ({ id }) => {
   const configureWebhook = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/configurewebhook",
+      "http://staticstorm.repocraft.com/api/deploy/configurewebhook",
       {
-        mode: "no-cors",
+        mode: 'same-origin',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -110,9 +110,9 @@ const Deploy = ({ id }) => {
 
   const reloadNginx = async () => {
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/deploy/reloadnginx",
+      "http://staticstorm.repocraft.com/api/deploy/reloadnginx",
       {
-        mode: "no-cors",
+        mode: 'same-origin',
         method: "POST",
         headers: {
           "Content-Type": "application/json",

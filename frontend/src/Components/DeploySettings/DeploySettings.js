@@ -17,9 +17,9 @@ const DeploySettings = ({ id }) => {
     const ia = await checkIsAvailable();
     if (ia) {
       const response = await fetch(
-        "http://api.staticstorm.repocraft.com/api/deploy",
+        "http://staticstorm.repocraft.com/api/deploy",
         {
-          mode: "no-cors",
+          mode: 'same-origin',
           method: "POST",
           headers: {
             "Content-Type": "application/json",

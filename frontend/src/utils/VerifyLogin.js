@@ -6,9 +6,9 @@ const VerifyLogin = () => {
 
   const login = async () => {
     const response = await fetch(
-      "http://api.staticstorm.repocraft.com/api/auth",
+      "http://staticstorm.repocraft.com/api/auth",
       {
-        mode: "no-cors",
+        mode: 'same-origin',
         method: "POST",
         headers: {
           "Content-Type": "application/json",
