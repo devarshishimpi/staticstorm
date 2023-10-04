@@ -19,6 +19,7 @@ const DeploySettings = ({ id }) => {
       const response = await fetch(
         "http://api.staticstorm.repocraft.com/api/deploy",
         {
+          mode: "cors",
           method: "POST",
           headers: {
             "Content-Type": "application/json",

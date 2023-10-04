@@ -6,7 +6,17 @@ connectToMongo();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// Enable CORS for specific routes
+const corsOptions = {
+  origin: "http://staticstorm.repocraft.com", // Replace with the allowed origin
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Allow cookies and credentials to be sent
+  optionsSuccessStatus: 204, // Respond to preflight requests with a 204 status code
+};
+app.use("/api/auth", cors(corsOptions));
+app.use("/api/deploy", cors(corsOptions));
+app.use("/api/projects", cors(corsOptions));
 
 const PORT = process.env.PORT || 8181;
 

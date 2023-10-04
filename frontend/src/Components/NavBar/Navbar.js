@@ -18,6 +18,7 @@ const Navbar = (props) => {
     const response = await fetch(
       "http://api.staticstorm.repocraft.com/api/auth/getuser",
       {
+        mode: "cors",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +51,7 @@ const Navbar = (props) => {
     },
     {
       name: "Github",
-      href: "https://github.com/devarshishimpi/staticstormhackathon",
+      href: "https://github.com/devarshishimpi/staticstorm",
       current: false,
     },
   ];
