@@ -1,0 +1,54 @@
+name: Sign-off Reminder
+
+on:
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+  pull_request_target:
+    types: [opened]
+  pull_request_review_comment:
+    types: [created]
+
+jobs:
+  sign-off-reminder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Check for Sign-off
+        run: |
+          for commit in $(git log --format="%H" ${{ github.event.before }}..${{ github.event.after }}); do
+            if ! git cat-file -p $commit | grep -q "Signed-off-by:"; then
+              echo "Commit $commit is not signed-off."
+              echo "Please sign off your commits before creating a pull request."
+              exit 1
+            fi
+          done
+
+      - name: Create Sign-off Reminder Comment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issueComment = `
+              Hey @${{ github.actor }},
+              
+              Thanks for your contribution! :tada: Please make sure to sign off your commits before creating or updating a pull request. Commits must include the "Signed-off-by:" line.
+
+              To sign off your commits, you can use the following command when making your commits:
+              \`\`\`
+              git commit -s -m "Your commit message"
+              \`\`\`
+
+              Thank you for helping us maintain a clean commit history!
+            `;
+
+            await github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: issueComment
+            });
