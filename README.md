@@ -12,9 +12,79 @@ Visit At <a href="http://staticstorm.coderush.tech" target="_blank">staticstorm.
 
 ## 🚀 Getting Started
 
-### Deployment
+To run the application locally for development purposes, please follow the instructions below:
 
-To deploy both the frontend and backend, follow these steps:
+- [Development Setup](#development): Deploy the application for local testing and development environment.
+
+For running the application locally for production purposes, refer to the [Production Setup](#production).
+
+### Development
+
+To deploy both the frontend and backend for local, follow these steps:
+
+> [!IMPORTANT]
+> We are currently migrating from create-react-app to Nextjs in the frontend, if that's where you want to contribute, please check the following github issue here: [#3](https://github.com/devarshishimpi/staticstorm/issues/3)
+
+#### Prerequisites
+
+Before you begin, ensure that you have the following prerequisites in place:
+
+- Node.js v16 or above
+
+##### Frontend Setup
+
+1. Clone the project repository:
+
+```bash
+git clone https://github.com/devarshishimpi/staticstorm
+cd staticstorm
+```
+
+2. Navigate to the frontend directory:
+
+```bash
+cd frontend
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+```
+
+4. Start the frontend development server:
+
+```bash
+npm start
+```
+
+The frontend should now be running locally, and you can access it in your web browser at `http://localhost:3000`.
+
+##### Backend Setup
+
+1. Navigate to the server directory in a new terminal window:
+
+```bash
+cd server
+```
+
+2. Install backend dependencies:
+
+```bash
+npm install
+```
+
+3. Start the backend server:
+
+```bash
+node index.js
+```
+
+The backend should now be running locally, and you can access it in your web browser at `http://localhost:8181`.
+
+### Production
+
+To deploy both the frontend and backend to proudction, follow these steps:
 
 #### Prerequisites
 
@@ -52,7 +122,6 @@ npm run build
 ```
 
 5. Copy the frontend files to the server's HTML directory:
-6.
 
 ```bash
 sudo cp -rf build /var/www/html
@@ -108,11 +177,14 @@ server {
 }
 ```
 
-11. Restart Nginx to apply the configuration changes\*\*:
+11. Restart Nginx to apply the configuration changes:
 
 ```bash
 sudo service nginx restart
 ```
+
+> [!NOTE]
+> If you want to use your custom domain name and subdomain, replace the second `_` in `server_name _;` with your domain name and subdomain.
 
 12. Access Your Application
 
