@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import config from "../../config";
 
 const DeploySettings = ({ id }) => {
   const [subDomain, setSubDomain] = useState(null);
@@ -17,7 +18,7 @@ const DeploySettings = ({ id }) => {
     const ia = await checkIsAvailable();
     if (ia) {
       const response = await fetch(
-        "http://staticstorm.repocraft.com/api/deploy",
+        `${config.apiUrl}/api/deploy`,
         {
           method: "POST",
           headers: {

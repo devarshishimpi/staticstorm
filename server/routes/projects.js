@@ -4,6 +4,7 @@ const UserSchema = require("../models/User");
 const ProjectSchema = require("../models/Project");
 // const { body, validationResult } = require('express-validator');
 const axios = require("axios");
+const cors = require('cors');
 
 router.use(cors());
 router.options("*", cors());

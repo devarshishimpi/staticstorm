@@ -11,6 +11,7 @@ const axios = require("axios");
 const qs = require("querystring");
 const { spawn } = require("child_process");
 const { promises: fs } = require("fs");
+const cors = require('cors');
 require("dotenv").config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -488,7 +489,7 @@ router.post("/configurewebhook", async (req, res) => {
       const payload = {
         name: "web",
         config: {
-          url: "http://staticstorm.repocraft.com/api/deploy/triggerwebhook",
+          url: `${process.env.appUrl}/api/deploy/triggerwebhook`,
           content_type: "json",
         },
         events: ["push"],
