@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useNavigate, Link, useLocation } from "react-router-dom";
+import config from "../../config";
 
 const Navbar = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,7 +17,7 @@ const Navbar = (props) => {
   const getUser = async () => {
     const accesstoken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://staticstorm.repocraft.com/api/auth/getuser",
+      `${config.apiUrl}/api/auth`,
       {
         method: "POST",
         headers: {

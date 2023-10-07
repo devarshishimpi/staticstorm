@@ -66,7 +66,7 @@ router.get("/github", (req, res) => {
     .then((response) => {
       const accessToken = response.data.access_token;
       return res.redirect(
-        `http://staticstorm.repocraft.com/verifyLogin?access_token=${accessToken}`,
+        `${process.env.appUrl}/verifyLogin?access_token=${accessToken}`,
       );
     })
     .catch((error) => {

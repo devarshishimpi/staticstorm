@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import config from "../../config";
 
 const Projects = ({ user }) => {
   const [projects, setProjects] = useState([]);
@@ -7,7 +8,7 @@ const Projects = ({ user }) => {
 
   const getAllProjects = async () => {
     const response = await fetch(
-      "http://staticstorm.repocraft.com/api/projects",
+      `${config.apiUrl}/api/projects`,
       {
         method: "POST",
         headers: {
@@ -31,7 +32,7 @@ const Projects = ({ user }) => {
     const shouldI = window.confirm(`Are you sure to delete ${project.name}?`);
     if (shouldI) {
       const response = await fetch(
-        "http://staticstorm.repocraft.com/api/deploy/deleteconf",
+        `${config.apiUrl}/api/deploy/deleteconf`,
         {
           method: "POST",
           headers: {
@@ -48,7 +49,7 @@ const Projects = ({ user }) => {
 
   const restartNginx = async () => {
     const response = await fetch(
-      "http://staticstorm.repocraft.com/api/deploy/reloadnginx",
+      `${config.apiUrl}/api/deploy/reloadnginx`,
       {
         method: "POST",
         headers: {
@@ -66,7 +67,7 @@ const Projects = ({ user }) => {
 
   const deleteFromDb = async (project) => {
     const response = await fetch(
-      "http://staticstorm.repocraft.com/api/deploy/deleteproject",
+      `${config.apiUrl}/api/deploy/deleteproject`,
       {
         method: "POST",
         headers: {

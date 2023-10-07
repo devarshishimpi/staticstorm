@@ -1,11 +1,12 @@
 import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import config from "../config";
 
 const VerifyLogin = () => {
   const navigate = useNavigate();
 
   const login = async () => {
-    const response = await fetch("http://staticstorm.repocraft.com/api/auth", {
+    const response = await fetch(`${config.apiUrl}/api/auth`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
