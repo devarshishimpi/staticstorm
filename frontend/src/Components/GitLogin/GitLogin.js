@@ -2,7 +2,7 @@ import React from "react";
 
 const GitLogin = () => {
   const handleLogin = () => {
-    window.location.href = `https://github.com/login/oauth/authorize?client_id=ac1d8a2d17323d42a036&scope=user:email,repo`;
+    window.location.href = `https://github.com/login/oauth/authorize?client_id=Iv1.34bd0cf9e551f264&scope=user:email,repo`;
   };
 
   return (

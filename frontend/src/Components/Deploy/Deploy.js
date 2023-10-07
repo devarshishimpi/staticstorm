@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import config from "../../config";
 
 const Deploy = ({ id }) => {
   const [cloningLogs, setCloningLogs] = useState(null);
@@ -9,7 +10,7 @@ const Deploy = ({ id }) => {
   const clone = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://staticstorm.repocraft.com/api/deploy/clone",
+      `${config.apiUrl}/api/deploy/clone`,
       {
         method: "POST",
         headers: {
@@ -25,7 +26,7 @@ const Deploy = ({ id }) => {
   const install = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://staticstorm.repocraft.com/api/deploy/install",
+      `${config.apiUrl}/api/deploy/install`,
       {
         method: "POST",
         headers: {
@@ -41,7 +42,7 @@ const Deploy = ({ id }) => {
   const build = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://staticstorm.repocraft.com/api/deploy/build",
+      `${config.apiUrl}/api/deploy/build`,
       {
         method: "POST",
         headers: {
@@ -57,7 +58,7 @@ const Deploy = ({ id }) => {
   const copyBuild = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://staticstorm.repocraft.com/api/deploy/copybuild",
+      `${config.apiUrl}/api/deploy/copybuild`,
       {
         method: "POST",
         headers: {
@@ -73,7 +74,7 @@ const Deploy = ({ id }) => {
   const nginxConf = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://staticstorm.repocraft.com/api/deploy/nginxconf",
+      `${config.apiUrl}/api/deploy/nginxconf`,
       {
         method: "POST",
         headers: {
@@ -89,7 +90,7 @@ const Deploy = ({ id }) => {
   const configureWebhook = async () => {
     const accessToken = localStorage.getItem("access-token");
     const response = await fetch(
-      "http://staticstorm.repocraft.com/api/deploy/configurewebhook",
+      `${config.apiUrl}/api/deploy/configurewebhook`,
       {
         method: "POST",
         headers: {
@@ -104,7 +105,7 @@ const Deploy = ({ id }) => {
 
   const reloadNginx = async () => {
     const response = await fetch(
-      "http://staticstorm.repocraft.com/api/deploy/reloadnginx",
+      `${config.apiUrl}/api/deploy/reloadnginx`,
       {
         method: "POST",
         headers: {
