@@ -15,9 +15,8 @@ const TopNav = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigation = [
     { name: "Home", href: "/" },
-    { name: "Community", href: "/community" },
-    { name: "Documentation", href: "/docs" },
-    { name: "Install", href: "/install" },
+    { name: "Community", href: "/soon" },
+    { name: "Documentation", href: "/soon" },
   ];
 
   // loading animation
@@ -57,7 +56,7 @@ const TopNav = () => {
           onLoaderFinished={() => setProgress(0)}
         />
       )}
-      <div className="bg-black py-5 px-6 lg:px-8">
+      <div className="bg-black absolute w-full py-5 px-6 lg:px-8">
         <div>
           {/* desktop nav */}
           <nav
