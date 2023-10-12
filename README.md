@@ -2,8 +2,6 @@
 
 ## Unleash the power of simple, fast and secure websites.
 
-![Banner](images/StaticStormbanner2.png)
-
 <hr>
 
 <!--
