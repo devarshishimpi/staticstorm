@@ -1,0 +1,29 @@
+.shiny {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+  position: relative;
+  border: none;
+  padding: 10px 15px;
+  background: #3984ff;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.shine {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(white, #3984ff00 80%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.shiny:hover .shine {
+  opacity: 0.4;
+}
