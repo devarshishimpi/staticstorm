@@ -88,13 +88,13 @@ const Navbar = (props) => {
                   <div className="flex flex-shrink-0 items-center">
                     <img
                       className="block h-8 w-auto lg:hidden"
-                      src="https://res.cloudinary.com/dvstech/image/upload/v1676718021/staticstormhackathonfiles/staticstormlogo_ukdxwt.png"
-                      alt="Devcode"
+                      src="https://cdn.staticstorm.repocraft.com/staticstormlogo.png"
+                      alt="StaticStorm"
                     />
                     <img
                       className="hidden h-8 w-auto lg:block"
-                      src="https://res.cloudinary.com/dvstech/image/upload/v1676718021/staticstormhackathonfiles/staticstormlogo_ukdxwt.png"
-                      alt="Devcode"
+                      src="https://cdn.staticstorm.repocraft.com/staticstormlogo.png"
+                      alt="StaticStorm"
                     />
                   </div>
                   <div className="hidden sm:ml-6 sm:block">

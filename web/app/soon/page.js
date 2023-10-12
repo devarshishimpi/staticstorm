@@ -1,11 +1,11 @@
 import Navbar from "@/Components/Navbar/DesktopView/TopNav";
-import Hero from "@/Components/Sections/Hero";
+import ComingSoon from "@/Components/Sections/ComingSoon";
 
-export default function Home() {
+export default function Soon() {
   return (
     <main>
       <Navbar />
-      <Hero />
+      <ComingSoon />
     </main>
   );
 }
