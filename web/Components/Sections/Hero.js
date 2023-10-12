@@ -21,8 +21,7 @@ const Hero = () => {
             </span>
           </h1>
           <p className="mb-8 text-2xl text-gray-300 lg:text-5xl md:text-4xl sm:px-28 xl:px-56">
-            Build simple, fast, and secure websites without worrying about
-            technical expertise or maintenance.
+            Build simple, fast, and secure websites without worrying about technical expertise or maintenance.
           </p>
           <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
             <Link
@@ -31,7 +30,7 @@ const Hero = () => {
               onMouseMove={handleMouseMove}
             >
               <svg
-                class="w-6 h-6 mr-2"
+                className="w-6 h-6 mr-2"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
