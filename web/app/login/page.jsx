@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useEffect } from "react";
 import GitLogin from "@/Components/GitLogin/GitLogin";
 import { useRouter } from "next/router";
@@ -14,8 +14,8 @@ const Login = () => {
 
   return (
     <>
-        <title>StaticStorm | Login</title>
-        <meta name="description" content="" />
+      <title>StaticStorm | Login</title>
+      <meta name="description" content="" />
       <GitLogin />
     </>
   );

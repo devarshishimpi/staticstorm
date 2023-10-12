@@ -77,7 +77,7 @@ const NewDeploy = ({
               <div className="columns-2">
                 <div>
                   <input
-                    placeholder="https://github.com/bytemakers/devcode"
+                    placeholder="https://github.com/devarshishimpi/staticstorm"
                     type="text"
                     id="default-input"
                     className="mt-5 text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"

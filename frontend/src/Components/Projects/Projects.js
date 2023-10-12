@@ -118,7 +118,7 @@ const Projects = ({ user }) => {
           {/* <div className="rounded-2 columns-2">
             <h5 class="mt-2 text-xl font-bold tracking-tight text-white">
               {" "}
-              devarshishimpi/devcode
+              devarshishimpi/StaticStorm
             </h5>
             <div class="float-right">
               <button

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useEffect, useState } from "react";
 import NewDeploy from "@/Components/NewDeploy/NewDeploy";
 import { useRouter } from "next/router";
@@ -78,9 +78,8 @@ const NewProject = () => {
 
   return (
     <>
-
-        <title>StaticStorm | New Project</title>
-        <meta name="description" content="" />
+      <title>StaticStorm | New Project</title>
+      <meta name="description" content="" />
       <NewDeploy
         getNextProjects={getNextProjects}
         getPreviousProjects={getPreviousProjects}

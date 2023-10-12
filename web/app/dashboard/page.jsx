@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useEffect, useState } from "react";
 // import { Helmet } from "react-helmet";
 // import { useNavigate } from "react-router-dom";
@@ -26,13 +26,11 @@ const Dashboard = () => {
     }
   };
 
-
-
   return (
     <div className="flex items-center justify-center">
-        <title>StaticStorm | Dashboard</title>
-        <meta name="description" content="" />
-  <Projects user={user} />
+      <title>StaticStorm | Dashboard</title>
+      <meta name="description" content="" />
+      <Projects user={user} />
     </div>
   );
 };
