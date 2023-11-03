@@ -48,7 +48,6 @@ router.get("/github", (req, res) => {
   const code = req.query.code;
   const clientId = process.env.GITHUB_CLIENT_ID;
   const clientSecret = process.env.GITHUB_CLIENT_SECRET;
-
   axios
     .post(
       "https://github.com/login/oauth/access_token",
