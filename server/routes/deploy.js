@@ -44,7 +44,12 @@ router.post("/", async (req, res) => {
         const alreadyExist = await ProjectSchema.findOne({ name: subDomain });
         if (alreadyExist)
           return res.status(401).json({ error: "Domain Unavailable" });
-        const portArray = await PortSchema.find();
+        let portArray = await PortSchema.find();
+        if (!portArray?.length) {
+          const defaultPort = 3001;
+          await (new PortSchema({ nextFreePort: defaultPort })).save();
+          portArray[0] = { nextFreePort: defaultPort };
+        }
         const port = portArray[0].nextFreePort;
 
         const project = await ProjectSchema.create({
